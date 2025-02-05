@@ -42,6 +42,13 @@ export async function signup(req,res){
         });
 
         await newUser.save();
+
+        res.status(201).json({success:true,message:"User created successfully",
+            user:{
+                ...newUser._doc,
+                password:"",
+            },
+        });
      }catch(error){
        console.log("Error in signup controller",error.message);
        res.status(500).json({success:false,message:"Internal server error"});
